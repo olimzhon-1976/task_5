@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <h1>Список ресторанов</h1>
+   <form method="GET">
+       <input type="text" name="q" placeholder="Поиск по специализации" value="{{ query }}">
+       <button type="submit">Поиск</button>
+   </form>
+   <table>
+       <tr>
+           <th>Название</th>
+           <th>Специализация</th>
+           <th>Адрес</th>
+           <th>Вебсайт</th>
+           <th>Телефон</th>
+           <th>Действия</th>
+       </tr>
+       {% for restaurant in restaurants %}
+       <tr>
+           <td>{{ restaurant.name }}</td>
+           <td>{{ restaurant.specialization }}</td>
+           <td>{{ restaurant.address }}</td>
+           <td>{{ restaurant.website }}</td>
+           <td>{{ restaurant.contact_phone }}</td>
+           <td>
+               <a href="{% url 'edit_restaurant' restaurant.id %}">Изменить</a>
+               <a href="{% url 'delete_restaurant' restaurant.id %}">Удалить</a>
+           </td>
+       </tr>
+       {% endfor %}
+   </table>
+   <a href="{% url 'add_restaurant' %}">Добавить новый ресторан</a>
+</body>
+</html>
